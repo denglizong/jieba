@@ -259,6 +259,46 @@ word 公司                start: 8                end:10
 word 有限公司            start: 6                end:10
 ```
 
+修改升级（Thanks to Dingyuan）
+6. Tokenize：返回词语在原文的起止位置
+----------------------------------
+* 注意，输入参数只接受 unicode
+* 默认模式
+
+```python
+import jieba
+import jieba.posseg as pseg
+result = pseg.postokenize(u'永和服装饰品有限公司')
+for tk in result:
+    print("word %s\t\t start: %d \t\t end:%d \t\t %s" % (tk[0],tk[1],tk[2], tk[3]))
+```
+
+```
+word 永和                start: 0                end:2     n
+word 服装                start: 2                end:4     n
+word 饰品                start: 4                end:6     n
+word 有限公司            start: 6                end:10    n
+
+```
+
+* 搜索模式
+
+```python
+import jieba
+import jieba.posseg as pseg
+result = pseg.postokenize(u'永和服装饰品有限公司',mode='search')
+for tk in result:
+    print("word %s\t\t start: %d \t\t end:%d \t\t %s" % (tk[0],tk[1],tk[2], tk[3]))
+```
+
+```
+word 永和                start: 0                end:2       n
+word 服装                start: 2                end:4       n
+word 饰品                start: 4                end:6       n
+word 有限                start: 6                end:8       n
+word 公司                start: 8                end:10      n
+word 有限公司            start: 6                end:10      n
+```
 
 7. ChineseAnalyzer for Whoosh 搜索引擎
 --------------------------------------------
